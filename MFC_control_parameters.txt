@@ -1,0 +1,56 @@
+Dear Rob,
+
+Here is a brief explanation of the P, D, and I adjustments:
+
+After you have achieved communications with the Alicat controller, you
+will need to read and write data to several registers in the EEPROM.  To
+read a register, send *R followed by the register number followed by
+enter.  For example to read register 21, send *R21<enter>  In order to
+Write a number to a register, send *W followed by the register number
+followed by = followed by the desired value followed by enter.  For
+example to write a value of 201 into register 23, send *W23=201<enter>.
+ 
+For a starting point, set register 21 (the P gain) to 100, register 22
+(the D gain) to 10, and register 23 (the I gain and algorithm select
+bit) to 201.  Please note that the value in register 23 has to be odd
+(ending in 1, 3, 5, 7, or 9) in order to be in the high performance
+mode.
+ 
+PD2I algorithm is used primarily for high performance pressure and flow
+control applications.  This algorithm exhibits two basic differences
+from the standard PID algorithm that most controllers utilize. 
+ 
+1. Instead of applying a damping function based upon the rate of change
+of the process value, it applies a damping function based upon the
+square of the rate of change of the process value.  
+2. The damping function is applied directly to the proportional error
+term before that term is used in the proportional and integral functions
+of the algorithm.  This provides a certain amount of 'look ahead'
+capability in the control loop.
+ 
+Because of the above listed differences, you will note the following:
+ 
+1. Increasing 'P' gain can be used to damp out overshoot and slow
+oscillations in pressure controllers.  You will know that 'P' gain is
+too high, when the controller breaks into fast oscillations on step
+changes in set-point.  On flow controllers, Too high a 'P' gain results
+in slower response times.  Too low a 'P' gain results in overshoot and
+or oscillation.  
+2. The 'D' gain value should usually be left at or near the suggested
+setting, because it relates primarily to the system phase lags.
+3. The 'I' gain is used to control the rate at which the process
+converges to the set-point, after the initial step change.  Too low a
+value for 'I' gain shows up as a process value that jumps to near the
+set-point and then takes awhile to converge the rest of the way.  Too
+high a value for 'I' gain results in oscillation. 
+
+
+Best Regards,
+Neil Hartman
+Chief Technology Officer
+Alicat Scientific, Inc. 
+7641 North Business Park Drive
+Tucson, AZ 85743
+ 
+Ph: (520) 290-6060
+Fax: (520) 290-0109
