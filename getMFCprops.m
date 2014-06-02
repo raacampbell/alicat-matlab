@@ -1,7 +1,7 @@
-function varargout=getMFCprops(AC,unit,prop)
+function varargout=getMFCprops(unit,prop)
 % Read properties of the MFC
 %
-% function props=getMFCprops(AC,unit,prop)
+% function props=getMFCprops(unit,prop)
 %
 % Purpose
 % Read the properties of the Alicat MFC identified by the character
@@ -11,21 +11,28 @@ function varargout=getMFCprops(AC,unit,prop)
 % the structure "props". Returning all is quite slow, so to return a
 % specific one, the third input argument must be supplied. For
 % example, to get back the volumetric flow information do:
-% getMFCprops(AC,unit,4) %does not print data to screen
+% getMFCprops(unit,4) %does not print data to screen
 %
 % Inputs
-% AC - serial port object associated with the MFCs.
 % units - single character denoting the MFC we want to poll
-% prop - [optional] index of the propery we wish to extract. 
+% prop - [optional] index of the property we wish to extract. 
 %
 % Outputs
 % props - structure containing the polled information
 %
+%
+% NOTE: Does not work with all meters. Older ones don't seem to respond. 
+%
+%
 % Rob Campbell - February 2012, JFRC
   
 
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
 
-if nargin<3
+
+
+if nargin<2
   prop=0;
 end
 
@@ -33,11 +40,11 @@ end
 if prop==0
 
   n=1;
-  fprintf(AC,sprintf('%s??D*',unit));
+  fprintf(aliComm,sprintf('%s??D*',unit));
   
   for ii=1:21
-    str=fscanf(AC);
-    fprintf('%s',str)
+    str=fscanf(aliComm);
+    fprintf('%s',str);
     if ii>1
       props(n)=readProps(str);
       n=n+1;
@@ -46,12 +53,11 @@ if prop==0
   
 else
   
-  fprintf(AC,sprintf('%s??D%d',unit,prop));
-  str=fscanf(AC)
+  fprintf(aliComm,sprintf('%s??D%d',unit,prop));
+  str=fscanf(aliComm);
   props=readProps(str);
   
 end
-
 
 
 

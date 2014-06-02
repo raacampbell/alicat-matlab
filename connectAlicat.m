@@ -1,5 +1,5 @@
-function aliComm=connectAlicat(COM)
-% function aliComm=connectAlicat(COM)
+function aliComm=connectAlicat
+% function aliComm=connectAlicat
 %
 % * Purpose
 % Form a connection to the Alicat controller. By default 
@@ -13,11 +13,10 @@ function aliComm=connectAlicat(COM)
 % Rob Campbell - 20th March 2008 - CSHL
 
 
-if nargin==0
-    COM='COM3';
-end
+%Edit following line for your comm port!
+COM='COM3';
 
-%    global aliComm
+fprintf('Connecting to Alicats on port %s\n',COM)
 
 aliComm=serial(COM,...
         'TimeOut', 2,...

@@ -4,17 +4,11 @@ Control Alicat MFCs via MATLAB
 
 Usage:
 
-make serial connection with connectAlicat. Use handle as input argument to other functions. Remember to supply the correct COM port as an argument to connectAlicat or hard-code your COM port into that file. 
-
-
-To do:
-Make connection happen automatically. 
-
+First hard-code the correct COM port into connectAlicat
 
 Example:
 
->> AC=connectAlicat;
->> pollMFC(AC,'A',1,1)
+pollMFC('A',1,1)
 
 ans = 
 

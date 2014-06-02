@@ -1,10 +1,9 @@
-function varargout=writeLoop(AC,MFC,loop)
-% function loop=writeLoop(AC,MFC,loop)
+function varargout=writeLoop(MFC,loop)
+% function loop=writeLoop(AMFC,loop)
 %
 % Set the loop mode of an MFC
 % 
 % Inputs
-% AC - serial port object 
 % MFC - string specifying the controller ID
 % loop - a scalar. 1 for mass, 2 for volume, 3 for pressure. 
 %
@@ -13,7 +12,12 @@ function varargout=writeLoop(AC,MFC,loop)
 %
 % Rob Campbell June 2010
 
-setFlow(AC,0,MFC) %Make sure we're zero before doing anything
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
+
+
+setFlow(0,MFC) %Make sure we're zero before doing anything
 
 
 %Different units have different register values for different loop types.
@@ -27,13 +31,13 @@ loops=[mass;...
        vol;...
        press];
    
-[~,L]=readLoop(AC,MFC);
+[~,L]=readLoop(MFC);
 L=loops(:,any(loops==L));
 
 
-fprintf(AC,[MFC,'$$W20=',num2str(L(loop))]);
-fscanf(AC);
+fprintf(aliComm,[MFC,'$$W20=',num2str(L(loop))]);
+fscanf(aliComm);
 
 if nargout==1
-    varargout{1}=readLoop(AC,MFC);    
+    varargout{1}=readLoop(MFC);    
 end

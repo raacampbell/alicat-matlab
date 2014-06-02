@@ -1,5 +1,5 @@
-function OUT=readAlicat(aliComm)
-% function OUT=readMFC(aliComm)
+function OUT=readAlicat
+% function OUT=readAlicat
 %
 % Read data from the alicat
 %
@@ -10,6 +10,9 @@ function OUT=readAlicat(aliComm)
 %
 %ID; pressure in; temp; ?  ; ?;  set point ; gas
 %A +014.61 +023.30 +00.000 +00.000 00.156     Air
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
 
 try
     

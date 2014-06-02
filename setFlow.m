@@ -1,5 +1,5 @@
-function setFlow(aliComm,flowRate,odourConc)
-% function setFlow(aliComm,flowRate,odourConc)
+function setFlow(flowRate,odourConc)
+% function setFlow(flowRate,odourConc)
 %
 % Set the flow rate of the combined odour stream and the odour
 % concentration. Or change flow of just one controller:
@@ -13,11 +13,14 @@ function setFlow(aliComm,flowRate,odourConc)
 %            flowRate. Can be a char array of several unit IDs in which
 %            case all are set to flowRate.
 % examples -
-% setFlow(AC,0.5,'A') %Set controler A to half full scale
-% setFlow(AC,2100/5000,'C') %Set 5 SLPM controler, C, to 2.1 SLPM
+% setFlow(0.5,'A') %Set controler A to half full scale
+% setFlow(2100/5000,'C') %Set 5 SLPM controler, C, to 2.1 SLPM
 %
 % Rob Campbell - 21st March 2008 - CSHL
 
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
 
 
 if ischar(odourConc)

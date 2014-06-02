@@ -1,4 +1,4 @@
-function out=pollFM(AC,ID,rate,samples)
+function out=pollFM(ID,rate,samples)
 % function out=pollFM(AC,ID,rate,samples)
 %
 % Poll Alicat flow meter "ID" every "rate" seconds, obtaining
@@ -13,6 +13,11 @@ function out=pollFM(AC,ID,rate,samples)
 %
 %
 % Rob Campbell - June 2010
+
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
+
 rateLimit=0.05;  
 if rate<rateLimit
   fprintf('Desired rate is too fast, setting rate to %f\n',...

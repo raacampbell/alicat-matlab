@@ -1,7 +1,8 @@
-function OUT=readMFC(aliComm,quiet)
-% function OUT=readMFC(aliComm,quiet)
+function OUT=readMFC(quiet)
+% function OUT=readMFC(quiet)
 %
-% Read data from the alicat
+% Read data from the alicat.
+% Quiet is optional. On by default.
 %
 % Rob Campbell - March 20th 2008 - CSHL
 
@@ -11,7 +12,13 @@ function OUT=readMFC(aliComm,quiet)
 %ID; pressure in; temp; vol flow ; mass flow;  set point ; gas
 %A +014.61 +023.30 +00.000 +00.000 00.156     Air
 
-if nargin<2, quiet=1; end
+
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
+
+
+if nargin<1, quiet=1; end
 
 try
     

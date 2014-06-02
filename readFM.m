@@ -1,15 +1,16 @@
-function OUT=readFM(aliComm)
-% function OUT=readFM(aliComm)
+function OUT=readFM
+% function OUT=readFM
 %
 % Read data from the Alicat flow meter
 %
 % Rob Campbell - June 14th 2010 - CSHL
 
 % Example of the data format is:
-% fprintf(aliConnect,'G'); fscanf(aliConnect)
-%
 %ID; pressure in; temp; volumetric flow; mass flow; gas
 %A +014.61 +023.30 +00.000 +00.000 00.156     Air
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
 
 try
     

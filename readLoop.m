@@ -1,21 +1,29 @@
-function varargout=readLoop(AC,MFC)
-% function loop=readLoop(AC,MFC)
+function varargout=readLoop(MFC)
+% function loop=readLoop(MFC)
 %
 % Query the loop mode of an MFC
 % 
 % Inputs
-% AC - serial port object 
 % MFC - string specifying the controller ID
 %
 % Outputs
 % loop - string giving the loop type. If no output arg then 
 % just print to screen. 
 %
+%
+% Example
+% L=readLoop('B')
+%
+%
 % Rob Campbell June 2010
 
 
-fprintf(AC,[MFC,'$$R20']);
-F=fscanf(AC);
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
+
+fprintf(aliComm,[MFC,'$$R20']);
+F=fscanf(aliComm);
 
 
 loop=regexp(F,'= (.*)','tokens');

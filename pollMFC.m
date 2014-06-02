@@ -1,4 +1,4 @@
-function out=pollMFC(AC,ID,rate,samples)
+function out=pollMFC(ID,rate,samples)
 % function out=pollMFC(AC,ID,rate,samples)
 %
 % Poll Alicat MFC "ID" every "rate" seconds, obtaining
@@ -13,6 +13,12 @@ function out=pollMFC(AC,ID,rate,samples)
 %
 %
 % Rob Campbell - June 2010
+
+
+global aliComm;
+if isempty(aliComm), aliComm=connectAlicat; end
+
+
 rateLimit=0.05;  
 if rate<rateLimit
   fprintf('Desired rate is too fast, setting rate to %f\n',...
@@ -21,8 +27,8 @@ end
 
 
 for ii=1:samples
-  fprintf(AC,ID);
-  out(ii)=readMFC(AC);
+  fprintf(aliComm,ID);
+  out(ii)=readMFC(aliComm);
   pause(rate)
 end
 
