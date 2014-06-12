@@ -1,7 +1,7 @@
-function OUT=readMFC(quiet)
-% function OUT=readMFC(quiet)
+function OUT=readMFC(MFC,quiet)
+% function OUT=readMFC(MFC,quiet)
 %
-% Read data from the alicat.
+% Read data from defined Alicat (MFC).
 % Quiet is optional. On by default.
 %
 % Rob Campbell - March 20th 2008 - CSHL
@@ -17,11 +17,14 @@ function OUT=readMFC(quiet)
 global aliComm;
 if isempty(aliComm), aliComm=connectAlicat; end
 
+if length(MFC)~=1
+    error('Only one MFC should be specified')
+end
 
-if nargin<1, quiet=1; end
+if nargin<2, quiet=1; end
 
 try
-    
+fprintf(aliComm,MFC)
 IN=fscanf(aliComm);
 [...
     OUT.ID, ...
