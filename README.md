@@ -1,6 +1,6 @@
 # Alicat-MATLAB
 
-Simple control Alicat mass flow controllers (MFCs) via MATLAB
+Simple control Alicat mass flow controllers (MFCs) via MATLAB.
 
 
 
