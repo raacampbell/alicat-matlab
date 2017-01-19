@@ -10,6 +10,7 @@ First hard-code the correct COM port into `connectAlicat`
 
 Example:
 
+```
 pollMFC('A',1,1)
 
 ans = 
@@ -22,3 +23,4 @@ ans =
           setPoint: 0.9000
                gas: 'Air'
               time: 7.3570e+005
+```
