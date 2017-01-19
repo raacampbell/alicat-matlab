@@ -6,7 +6,7 @@ Simple control Alicat mass flow controllers (MFCs) via MATLAB
 
 ### Usage
 
-First hard-code the correct COM port into `connectAlicat`
+First hard-code the correct COM port into `connectAlicat` then connect:
 
 Example:
 
