@@ -1,8 +1,14 @@
 function OUT=readMFC(MFC,quiet)
+% Read data from defined Alicat MFC
+%
 % function OUT=readMFC(MFC,quiet)
 %
-% Read data from defined Alicat (MFC).
-% Quiet is optional. On by default.
+% Purpose 
+% Read data from defined Alicat MFC.
+%
+% Inputs
+% MFC - the string defining which MFC to read fom (e.g. 'A', 'C', etc)
+% quiet - optional. true by default.
 %
 % Rob Campbell - March 20th 2008 - CSHL
 
@@ -24,8 +30,8 @@ end
 if nargin<2, quiet=1; end
 
 try
-fprintf(aliComm,MFC)
-IN=fscanf(aliComm);
+fprintf(aliComm,MFC); %Ping the MFC
+IN=fscanf(aliComm); %Read back tthe data
 [...
     OUT.ID, ...
     OUT.pressure,...
@@ -35,7 +41,7 @@ IN=fscanf(aliComm);
     OUT.setPoint,...
     OUT.gas...
     ]=...
-    strread(IN,'%s%f%f%f%f%f%s', 'delimiter', ' ');
+    strread(IN,'%s%f%f%f%f%f%s', 'delimiter', ' '); %Format the data
 
 
 OUT.ID  = cell2mat(OUT.ID) ;
