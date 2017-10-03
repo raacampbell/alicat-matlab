@@ -23,3 +23,6 @@ ans =
                gas: 'Air'
               time: 7.3570e+005
 ```
+
+### Other tools
+[numat/alicat](https://github.com/numat/alicat) is a Python tool. 
